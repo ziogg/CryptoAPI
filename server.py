@@ -42,9 +42,9 @@ class CryptoGbp(Resource):
         return jsonify(result)
 
 
-api.add_resource(CryptoUsd, '/crypto&curr=USD')
-api.add_resource(CryptoEur, '/crypto&curr=EUR')
-api.add_resource(CryptoGbp, '/crypto&curr=GBP')
+api.add_resource(CryptoUsd, '/crypto/USD')
+api.add_resource(CryptoEur, '/crypto/EUR')
+api.add_resource(CryptoGbp, '/crypto/GBP')
 
 
 if __name__ == '__main__':
