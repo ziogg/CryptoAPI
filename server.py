@@ -15,16 +15,36 @@ app.config['JSON_AS_ASCII'] = False
 api = Api(app)
 
 ############
-class Crypto(Resource):
+class CryptoUsd(Resource):
     
     def get(self):
         conn = db_crypto.connect()
-        query = conn.execute("SELECT * FROM data")
+        query = conn.execute("SELECT * FROM data1")
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return jsonify(result)
 
 
-api.add_resource(Crypto, '/crypto')
+class CryptoEur(Resource):
+    
+    def get(self):
+        conn = db_crypto.connect()
+        query = conn.execute("SELECT * FROM data2")
+        result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
+        return jsonify(result)
+
+
+class CryptoGbp(Resource):
+    
+    def get(self):
+        conn = db_crypto.connect()
+        query = conn.execute("SELECT * FROM data3")
+        result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
+        return jsonify(result)
+
+
+api.add_resource(CryptoUsd, '/crypto&curr=USD')
+api.add_resource(CryptoEur, '/crypto&curr=EUR')
+api.add_resource(CryptoGbp, '/crypto&curr=GBP')
 
 
 if __name__ == '__main__':

@@ -36,8 +36,9 @@ class Db:
         self.conn.execute(query)
         self.conn.commit()
 
-    def delete_column(self):
-        pass
-
-    def delete_table(self):
-        pass
+    def is_empty(self):
+        self.cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+        if len(self.cursor.fetchall()) == 0:
+            return True
+        else:
+            return False
