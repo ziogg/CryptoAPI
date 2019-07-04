@@ -26,7 +26,7 @@ def update_db(db, raw):
         db.add_to_table('data3', columns, f'("{i[0]}", "{i[1]}", "{round(float(i[2])*c[1], 3)}", "{round(float(i[3])*c[1], 3)}", "{round(float(i[4])*c[1], 3)}", "{i[5]}", "{i[6]}", "{i[7]}", "{i[8]}", "GBP", "{i[9]}")')
 
 def get_info(table):
-    for coin in table[1:]:
+    for coin in table[1:]: # first element is column names of table
         symbol = coin.find('span', class_='currency-symbol')
         try:
             logo = coin.find('img', class_='logo-sprite')['data-src']
@@ -46,6 +46,7 @@ def get_info(table):
         week_graph = coin.find('img', class_='sparkline')#['src']
         yield symbol.text, name.text, re.sub("\W","",mrkt_cap.text), re.sub(r'[^\w.]', '',price.text), re.sub("\W","",volume.text), re.sub('[^0-9]','', circulating.text), change.text, logo, week_graph['src'], minable
 
+### DDOS protection too slow ###
 #def get_description(href):
 #    try:
 #        url = 'https://coinmarketcap.com' + href
