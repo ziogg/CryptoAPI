@@ -70,10 +70,12 @@ def get_conversion_values():
 
 if __name__ == '__main__':
     #while True:
+    # main variables
     d = Db('crypto.db')
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36'}
     url = 'https://coinmarketcap.com'
     req = r.get(url, headers=headers)
+    # check if DB is empty, if so create tables
     if d.is_empty():
         statement = '("coin" TEXT UNIQUE, "name" TEXT UNIQUE, "market_cap" REAL, "price" REAL, \
             "DailyVolume" REAL, "circulating" INTEGER, "DailyChange" TEXT, "logo" TEXT, "WeeklyChange" TEXT, "currency" TEXT, "minable" INTEGER)'
